@@ -18,38 +18,7 @@ Lock down an Azure Storage account so it is **unreachable from the public intern
 
 ## 🗺️ Architecture
 
-```
-                         Amsterdam laptop (outside Azure)
-                                     │
-                                     │  nslookup / browser
-                                     ▼
-                        Public DNS ──► 20.209.110.33  (PUBLIC IP)
-                                     │
-                                     ▼
-                        ┌───────────────────────────┐
-                        │  Public access: DISABLED   │ ──►  ❌ blocked / PublicAccessNotPermitted
-                        └───────────────────────────┘
-                                     ▲
-                                     │  private path only
-┌───────────────────────────────────┼───────────────────────────────────┐
-│  VNet: vnet-project2 (10.10.0.0/16)                                     │
-│                                                                         │
-│   ┌─────────────────────────┐        ┌──────────────────────────────┐  │
-│   │  Subnet: snet-workload   │        │  Private Endpoint            │  │
-│   │  (10.10.1.0/24)          │        │  pe-storage-project2         │  │
-│   │                          │        │  NIC private IP: 10.10.1.5   │  │
-│   │   [ vm-test ]  ──────────┼───────►│  sub-resource: blob          │  │
-│   │   azureuser              │        └──────────────┬───────────────┘  │
-│   └─────────────────────────┘                       │                  │
-│                                                      ▼                  │
-│         Private DNS Zone: privatelink.blob.core.windows.net             │
-│         A-record:  stproject2spas ──► 10.10.1.5                         │
-└─────────────────────────────────────────────────────────────────────────┘
-                                     │
-                                     ▼
-                     Storage Account: stproject2spas
-                     (blob) — Public network access: Disabled
-```
+![Architecture diagram](screenshots/architecture.png)
 
 ---
 
