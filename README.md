@@ -2,7 +2,7 @@
 
 Lock down an Azure Storage account so it is **unreachable from the public internet** and can only be accessed **privately from within a virtual network** via an Azure **Private Endpoint** + **Private DNS Zone**.
 
-> Part of my hands-on **AZ-104** portfolio. Built **portal-first** to learn the concepts, then reproduced as **Infrastructure as Code (Bicep)**.
+> Part of my hands-on experience with Azure. Built **portal-first** to learn the concepts, then reproduced as **Infrastructure as Code (Bicep)**.
 
 ---
 
