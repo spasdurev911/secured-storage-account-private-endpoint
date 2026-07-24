@@ -82,7 +82,6 @@ Aliases:  stproject2spas.blob.core.windows.net
 
 > **Same name, two answers:** private IP inside the VNet, public IP outside. Azure DNS resolves the `privatelink` zone **only for machines in the VNet**.
 
-📸 _Screenshot: `screenshots/06-dns-vm-vs-laptop.png`_
 
 ### The "two gates" lesson (network vs. authorization)
 
@@ -129,39 +128,7 @@ To access data successfully, reach the blob **with credentials** (SAS token, Sto
 
 ## 📦 Infrastructure as Code (Bicep)
 
-See bicep/main.bicep for the IaC version. It shows a clean dependency chain:
-
-```
-storage account
-   └── private endpoint
-         └── private DNS zone
-               └── DNS zone group (A-record wiring)
-   + publicNetworkAccess: 'Disabled'
-```
-
-**Deploy:**
-```bash
-az group create --name rg-storage-project2 --location westeurope
-az deployment group create \
-  --resource-group rg-storage-project2 \
-  --template-file bicep/main.bicep
-```
-
----
-
-## 🗂️ Repo structure
-
-```
-Project2-SecuredStorage/
-├── README.md
-├── bicep/
-│   └── main.bicep
-└── screenshots/
-    ├── 06-dns-vm-vs-laptop.png
-    └── 06b-publicaccessnotpermitted.png
-```
-
----
+See bicep/main.bicep for the IaC version.
 
 ## 🧹 Cleanup
 
